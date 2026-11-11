@@ -13,6 +13,7 @@ add_compile_options("-Wall")
 add_compile_options("-Wextra")
 add_compile_options("-Wpedantic")
 add_compile_options("-pedantic-errors")
+add_compile_options("-fno-exceptions")
 add_compile_options("-stdlib=libc++")
 
 project(qbki-emu VERSION 0.0.1 LANGUAGES CXX)

@@ -1,0 +1,17 @@
+CompileFlags:
+  Add: [
+    "-std=c++23",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-pedantic-errors",
+    "-fno-exceptions"
+  ]
+
+
+Diagnostics:
+  # Use IWYU utils, for instance `make iwyu`.
+  # Both IWYU and UnusedIncludes have unresolvable conflicts. So, it is better
+  # to use only IWYU (version 0.21, older versions have issues with C++20:
+  # errors on concepts).
+  UnusedIncludes: None
