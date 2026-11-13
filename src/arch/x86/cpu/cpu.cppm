@@ -62,11 +62,39 @@ public:
   void bl(std::uint8_t value) { set_ls(_ebx, value); }
 
 
+  std::uint32_t ebp() const { return _ebp.get(); }
+  void ebp(std::uint32_t value) { _ebp.set(value); }
+
+  std::uint16_t bp() const { return static_cast<std::uint16_t>(_ebp.get()); }
+  void bp(std::uint16_t value) { _ebp.set(value); }
+
+
+  std::uint32_t esi() const { return _esi.get(); }
+  void esi(std::uint32_t value) { _esi.set(value); }
+
+  std::uint16_t si() const { return static_cast<std::uint16_t>(_esi.get()); }
+  void si(std::uint16_t value) { _esi.set(value); }
+
+
+  std::uint32_t edi() const { return _edi.get(); }
+  void edi(std::uint32_t value) { _edi.set(value); }
+
+  std::uint16_t di() const { return static_cast<std::uint16_t>(_edi.get()); }
+  void di(std::uint16_t value) { _edi.set(value); }
+
+
   void inc_ip() { _ip.set(_ip.get() + 1); }
   std::uint8_t get_mem_byte() const { return _memory.at(_ip.get()); }
+  std::uint16_t get_mem_word() const {
+    auto lo = _memory.at(_ip.get());
+    auto hi = _memory.at(_ip.get() + 1);
+    return (hi << 8) | lo;
+  }
 
 
   void memory(const std::vector<std::uint8_t>& value) { _memory = value; }
+
+  std::uint8_t peek(uint32_t address) const { return _memory.at(address); }
 
 
 private:

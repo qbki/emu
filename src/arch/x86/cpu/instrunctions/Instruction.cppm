@@ -15,9 +15,6 @@ public:
   virtual ~Instruction() = default;
 
   virtual void execute(CPU& cpu) const = 0;
-
-private:
-  unsigned int _size {};
 };
 
 }

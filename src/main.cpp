@@ -8,12 +8,14 @@ int main() {
   using namespace arch::x86;
 
   CPU cpu {};
-  cpu.memory({0x32, 0xc0});
+  cpu.memory({0x32, 0x04, 43});
+  cpu.si(2);
   cpu.eax(43);
 
+  std::println("{}", cpu.al());
   Xor32Instruction instruction {};
   tick(cpu, instruction);
+  std::println("{}", cpu.al());
 
-  std::println("{}", cpu.eax());
   return 0;
 }
