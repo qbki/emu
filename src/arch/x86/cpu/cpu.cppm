@@ -4,6 +4,7 @@ module;
 export module arch.x86.cpu;
 
 import utils.setter;
+import utils.flow;
 
 namespace arch::x86 {
 
@@ -95,6 +96,51 @@ public:
   void memory(const std::vector<std::uint8_t>& value) { _memory = value; }
 
   std::uint8_t peek(uint32_t address) const { return _memory.at(address); }
+
+
+  std::uint8_t get_reg_value(std::uint8_t rm) const {
+    switch (rm) {
+      case 0b000: return al();
+      case 0b001: return cl();
+      case 0b010: return dl();
+      case 0b011: return bl();
+      case 0b100: return ah();
+      case 0b101: return ch();
+      case 0b110: return dh();
+      case 0b111: return bh();
+      default: utils::die("Unexpected register"); break;
+    }
+  }
+
+
+  void set_reg_value(std::uint8_t rm, std::uint8_t value) {
+    switch (rm) {
+      case 0b000: al(value); break;
+      case 0b001: cl(value); break;
+      case 0b010: dl(value); break;
+      case 0b011: bl(value); break;
+      case 0b100: ah(value); break;
+      case 0b101: ch(value); break;
+      case 0b110: dh(value); break;
+      case 0b111: bh(value); break;
+      default: utils::die("Unexpected register"); break;
+    }
+  }
+
+
+  std::uint8_t get_mem_value(std::uint8_t rm, int disp = 0) {
+    switch (rm) {
+      case 0b000: return peek(bx() + si() + disp);
+      case 0b001: return peek(bx() + di() + disp);
+      case 0b010: return peek(bp() + si() + disp);
+      case 0b011: return peek(bp() + di() + disp);
+      case 0b100: return peek(si() + disp);
+      case 0b101: return peek(di() + disp);
+      case 0b110: return peek(bp() + disp);
+      case 0b111: return peek(bx() + disp);
+      default: utils::die("Unexpected memory access"); break;
+    }
+  }
 
 
 private:
