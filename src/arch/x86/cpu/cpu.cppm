@@ -84,6 +84,7 @@ public:
   void di(std::uint16_t value) { _edi.set(value); }
 
 
+  std::uint32_t ip() { return _ip.get(); };
   void inc_ip() { _ip.set(_ip.get() + 1); }
   std::uint8_t get_mem_byte() const { return _memory.at(_ip.get()); }
   std::uint16_t get_mem_word() const {
@@ -93,7 +94,9 @@ public:
   }
 
 
+  std::vector<std::uint8_t>& memory() { return _memory; }
   void memory(const std::vector<std::uint8_t>& value) { _memory = value; }
+
 
   std::uint8_t peek(uint32_t address) const { return _memory.at(address); }
 
