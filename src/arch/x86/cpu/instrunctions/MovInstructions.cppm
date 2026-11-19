@@ -28,14 +28,14 @@ public:
     switch (mod) {
       case 0b00: {
         auto value_b = cpu.get_mem_value(rm_b);
-        cpu.set_reg_value(rm_a, value_b);
+        cpu.set_reg_value_8(rm_a, value_b);
         break;
       }
       case 0b01: {
         auto disp = cpu.get_mem_byte();
         cpu.inc_ip();
         auto value_b = cpu.get_mem_value(rm_b, disp);
-        cpu.set_reg_value(rm_a, value_b);
+        cpu.set_reg_value_8(rm_a, value_b);
         break;
       }
       case 0b10: {
@@ -43,12 +43,12 @@ public:
         cpu.inc_ip();
         cpu.inc_ip();
         auto value_b = cpu.get_mem_value(rm_b, disp);
-        cpu.set_reg_value(rm_a, value_b);
+        cpu.set_reg_value_8(rm_a, value_b);
         break;
       }
       case 0b11: {
-        auto value_b = cpu.get_reg_value(rm_b);
-        cpu.set_reg_value(rm_a, value_b);
+        auto value_b = cpu.get_reg_value_8(rm_b);
+        cpu.set_reg_value_8(rm_a, value_b);
         break;
       }
       default:
@@ -75,7 +75,7 @@ public:
     auto value = cpu.get_mem_byte();
     cpu.inc_ip(); // Next opcode
 
-    cpu.set_reg_value(rm, value);
+    cpu.set_reg_value_8(rm, value);
   }
 };
 

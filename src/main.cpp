@@ -8,7 +8,7 @@ import arch.x86.xor_instructions;
 import arch.x86.mov_instructions;
 import arch.x86.utils;
 
-int main() {
+int main(int argc, char[] argv*) {
   using namespace arch::x86;
 
   std::unordered_map<std::uint32_t, std::unique_ptr<Instruction>> opcode_mapping {};

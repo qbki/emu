@@ -63,6 +63,13 @@ public:
   void bl(std::uint8_t value) { set_ls(_ebx, value); }
 
 
+  std::uint32_t esp() const { return _esp.get(); }
+  void esp(std::uint32_t value) { _esp.set(value); }
+
+  std::uint16_t sp() const { return static_cast<std::uint16_t>(_esp.get()); }
+  void sp(std::uint16_t value) { _esp.set(value); }
+
+
   std::uint32_t ebp() const { return _ebp.get(); }
   void ebp(std::uint32_t value) { _ebp.set(value); }
 
@@ -101,7 +108,7 @@ public:
   std::uint8_t peek(uint32_t address) const { return _memory.at(address); }
 
 
-  std::uint8_t get_reg_value(std::uint8_t rm) const {
+  std::uint8_t get_reg_value_8(std::uint8_t rm) const {
     switch (rm) {
       case 0b000: return al();
       case 0b001: return cl();
@@ -116,7 +123,7 @@ public:
   }
 
 
-  void set_reg_value(std::uint8_t rm, std::uint8_t value) {
+  void set_reg_value_8(std::uint8_t rm, std::uint8_t value) {
     switch (rm) {
       case 0b000: al(value); break;
       case 0b001: cl(value); break;
@@ -126,6 +133,36 @@ public:
       case 0b101: ch(value); break;
       case 0b110: dh(value); break;
       case 0b111: bh(value); break;
+      default: utils::die("Unexpected register"); break;
+    }
+  }
+
+
+  std::uint16_t get_reg_value_16(std::uint8_t rm) const {
+    switch (rm) {
+      case 0b000: return ax();
+      case 0b001: return cx();
+      case 0b010: return dx();
+      case 0b011: return bx();
+      case 0b100: return sp();
+      case 0b101: return bp();
+      case 0b110: return si();
+      case 0b111: return di();
+      default: utils::die("Unexpected register"); break;
+    }
+  }
+
+
+  void set_reg_value_16(std::uint8_t rm, std::uint16_t value) {
+    switch (rm) {
+      case 0b000: ax(value); break;
+      case 0b001: cx(value); break;
+      case 0b010: dx(value); break;
+      case 0b011: bx(value); break;
+      case 0b100: sp(value); break;
+      case 0b101: bp(value); break;
+      case 0b110: si(value); break;
+      case 0b111: di(value); break;
       default: utils::die("Unexpected register"); break;
     }
   }
