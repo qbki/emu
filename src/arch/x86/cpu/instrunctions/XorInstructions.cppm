@@ -16,7 +16,7 @@ namespace arch::x86 {
  */
 export
 class Xor31Instruction : public Instruction {
-  void execute(CPU& cpu) const {
+  void execute(CPU& cpu) const override {
     cpu.inc_ip(); // ModR/M
 
     auto modrm = cpu.get_mem_byte();
@@ -70,7 +70,7 @@ class Xor31Instruction : public Instruction {
 export
 class Xor32Instruction : public Instruction {
 public:
-  void execute(CPU& cpu) const {
+  void execute(CPU& cpu) const override {
     cpu.inc_ip(); // ModR/M
 
     auto modrm = cpu.get_mem_byte();

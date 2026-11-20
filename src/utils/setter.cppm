@@ -1,3 +1,5 @@
+module;
+#include <memory>
 export module utils.setter;
 
 import utils.events;
@@ -19,6 +21,11 @@ public:
 
   T get() const {
     return _value;
+  }
+
+
+  void add(Events<T>::Fn fn) {
+    _events.add(std::move(fn));
   }
 
 

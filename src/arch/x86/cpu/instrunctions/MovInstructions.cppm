@@ -16,7 +16,7 @@ namespace arch::x86 {
  */
 class Mov8aInstruction : public Instruction {
 public:
-  void execute(CPU& cpu) const {
+  void execute(CPU& cpu) const override {
     cpu.inc_ip(); // ModR/M
 
     auto modrm = cpu.get_mem_byte();
@@ -66,7 +66,7 @@ public:
 export
 class Mov80Instruction : public Instruction {
 public:
-  void execute(CPU& cpu) const {
+  void execute(CPU& cpu) const override {
     auto opcode = cpu.get_mem_byte();
     auto rm = opcode & 0b111;
 

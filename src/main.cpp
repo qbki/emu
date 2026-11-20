@@ -1,36 +1,27 @@
-#include <memory>
 #include <print>
-#include <unordered_map>
 
-import arch.x86.cpu;
-import arch.x86.instruction;
-import arch.x86.xor_instructions;
-import arch.x86.mov_instructions;
-import arch.x86.utils;
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 
-int main(int argc, char[] argv*) {
-  using namespace arch::x86;
+int main(int argc, char* argv[]) {
+  qputenv("QT_QPA_PLATFORM", "xcb");
+  qputenv("FONTCONFIG_PATH", "/etc/fonts");
 
-  std::unordered_map<std::uint32_t, std::unique_ptr<Instruction>> opcode_mapping {};
-  opcode_mapping.insert({0x80, std::make_unique<Mov80Instruction>()});
-  opcode_mapping.insert({0x32, std::make_unique<Xor32Instruction>()});
+  QGuiApplication app(argc, argv);
+  QQmlApplicationEngine engine;
+  const QUrl url(QStringLiteral("qrc:/qt/qml/App/src/gui/Main.qml"));
 
-  CPU cpu {};
-  cpu.memory({0x80, 42, 0x32, 0x04, 42});
-  cpu.si(4);
+  QObject::connect(&engine,
+                   &QQmlApplicationEngine::objectCreationFailed,
+                   &app,
+                   []() {
+                     std::println("Can't create a window");
+                     QCoreApplication::exit(-1);
+                   },
+                   Qt::QueuedConnection);
 
-  std::println("{}", cpu.al());
+  engine.load(url);
 
-  while (true) {
-    auto opcode = cpu.get_mem_byte();
-    if (opcode_mapping.contains(opcode)) {
-      tick(cpu, *(opcode_mapping.at(opcode)));
-    } else {
-      break;
-    }
-  }
+  return app.exec();
 
-  std::println("{}", cpu.al());
-
-  return 0;
 }

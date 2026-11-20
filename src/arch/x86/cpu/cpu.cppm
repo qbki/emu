@@ -11,90 +11,108 @@ namespace arch::x86 {
 export
 class CPU {
 public:
-  std::uint32_t eax() const { return _eax.get(); }
+  [[nodiscard]] std::uint32_t eax() const { return _eax.get(); }
   void eax(std::uint32_t value) { _eax.set(value); }
 
-  std::uint16_t ax() const { return get_xs(_eax); }
+  [[nodiscard]] std::uint16_t ax() const { return get_xs(_eax); }
   void ax(std::uint16_t value) { set_xs(_eax, value); }
 
-  std::uint8_t ah() const { return get_hs(_eax); }
+  [[nodiscard]] std::uint8_t ah() const { return get_hs(_eax); }
   void ah(std::uint8_t value) { set_hs(_eax, value); }
 
-  std::uint8_t al() const { return get_ls(_eax); }
+  [[nodiscard]] std::uint8_t al() const { return get_ls(_eax); }
   void al(std::uint8_t value) { set_ls(_eax, value); }
 
 
-  std::uint32_t ecx() const { return _ecx.get(); }
+  [[nodiscard]] std::uint32_t ecx() const { return _ecx.get(); }
   void ecx(std::uint32_t value) { _ecx.set(value); }
 
-  std::uint16_t cx() const { return get_xs(_ecx); }
+  [[nodiscard]] std::uint16_t cx() const { return get_xs(_ecx); }
   void cx(std::uint16_t value) { set_xs(_ecx, value); }
 
-  std::uint8_t ch() const { return get_hs(_ecx); }
+  [[nodiscard]] std::uint8_t ch() const { return get_hs(_ecx); }
   void ch(std::uint8_t value) { set_hs(_ecx, value); }
 
-  std::uint8_t cl() const { return get_ls(_ecx); }
+  [[nodiscard]] std::uint8_t cl() const { return get_ls(_ecx); }
   void cl(std::uint8_t value) { set_ls(_ecx, value); }
 
 
-  std::uint32_t edx() const { return _edx.get(); }
+  [[nodiscard]] std::uint32_t edx() const { return _edx.get(); }
   void edx(std::uint32_t value) { _edx.set(value); }
 
-  std::uint16_t dx() const { return get_xs(_edx); }
+  [[nodiscard]] std::uint16_t dx() const { return get_xs(_edx); }
   void dx(std::uint16_t value) { set_xs(_edx, value); }
 
-  std::uint8_t dh() const { return get_hs(_edx); }
+  [[nodiscard]] std::uint8_t dh() const { return get_hs(_edx); }
   void dh(std::uint8_t value) { set_hs(_edx, value); }
 
-  std::uint8_t dl() const { return get_ls(_edx); }
+  [[nodiscard]] std::uint8_t dl() const { return get_ls(_edx); }
   void dl(std::uint8_t value) { set_ls(_edx, value); }
 
 
-  std::uint32_t ebx() const { return _ebx.get(); }
+  [[nodiscard]] std::uint32_t ebx() const { return _ebx.get(); }
   void ebx(std::uint32_t value) { _ebx.set(value); }
 
-  std::uint16_t bx() const { return get_xs(_ebx); }
+  [[nodiscard]] std::uint16_t bx() const { return get_xs(_ebx); }
   void bx(std::uint16_t value) { set_xs(_ebx, value); }
 
-  std::uint8_t bh() const { return get_hs(_ebx); }
+  [[nodiscard]] std::uint8_t bh() const { return get_hs(_ebx); }
   void bh(std::uint8_t value) { set_hs(_ebx, value); }
 
-  std::uint8_t bl() const { return get_ls(_ebx); }
+  [[nodiscard]] std::uint8_t bl() const { return get_ls(_ebx); }
   void bl(std::uint8_t value) { set_ls(_ebx, value); }
 
 
-  std::uint32_t esp() const { return _esp.get(); }
+  [[nodiscard]] std::uint32_t esp() const { return _esp.get(); }
   void esp(std::uint32_t value) { _esp.set(value); }
 
-  std::uint16_t sp() const { return static_cast<std::uint16_t>(_esp.get()); }
+  [[nodiscard]] std::uint16_t sp() const { return static_cast<std::uint16_t>(_esp.get()); }
   void sp(std::uint16_t value) { _esp.set(value); }
 
 
-  std::uint32_t ebp() const { return _ebp.get(); }
+  [[nodiscard]] std::uint32_t ebp() const { return _ebp.get(); }
   void ebp(std::uint32_t value) { _ebp.set(value); }
 
-  std::uint16_t bp() const { return static_cast<std::uint16_t>(_ebp.get()); }
+  [[nodiscard]] std::uint16_t bp() const { return static_cast<std::uint16_t>(_ebp.get()); }
   void bp(std::uint16_t value) { _ebp.set(value); }
 
 
-  std::uint32_t esi() const { return _esi.get(); }
+  [[nodiscard]] std::uint32_t esi() const { return _esi.get(); }
   void esi(std::uint32_t value) { _esi.set(value); }
 
-  std::uint16_t si() const { return static_cast<std::uint16_t>(_esi.get()); }
+  [[nodiscard]] std::uint16_t si() const { return static_cast<std::uint16_t>(_esi.get()); }
   void si(std::uint16_t value) { _esi.set(value); }
 
 
-  std::uint32_t edi() const { return _edi.get(); }
+  [[nodiscard]] std::uint32_t edi() const { return _edi.get(); }
   void edi(std::uint32_t value) { _edi.set(value); }
 
-  std::uint16_t di() const { return static_cast<std::uint16_t>(_edi.get()); }
+  [[nodiscard]] std::uint16_t di() const { return static_cast<std::uint16_t>(_edi.get()); }
   void di(std::uint16_t value) { _edi.set(value); }
+
+  [[nodiscard]] std::uint16_t cs() const { return _edi.get(); }
+  void cs(std::uint16_t value) { _edi.set(value); }
+
+  [[nodiscard]] std::uint16_t ds() const { return _edi.get(); }
+  void ds(std::uint16_t value) { _edi.set(value); }
+
+  [[nodiscard]] std::uint16_t ss() const { return _edi.get(); }
+  void ss(std::uint16_t value) { _edi.set(value); }
+
+  [[nodiscard]] std::uint16_t es() const { return _edi.get(); }
+  void es(std::uint16_t value) { _edi.set(value); }
+
+  [[nodiscard]] std::uint16_t fs() const { return _edi.get(); }
+  void fs(std::uint16_t value) { _edi.set(value); }
+
+  [[nodiscard]] std::uint16_t gs() const { return _edi.get(); }
+  void gs(std::uint16_t value) { _edi.set(value); }
 
 
   std::uint32_t ip() { return _ip.get(); };
   void inc_ip() { _ip.set(_ip.get() + 1); }
-  std::uint8_t get_mem_byte() const { return _memory.at(_ip.get()); }
-  std::uint16_t get_mem_word() const {
+  [[nodiscard]] std::uint8_t get_mem_byte() const { return _memory.at(_ip.get()); }
+  [[nodiscard]] std::uint16_t get_mem_word() const {
     auto lo = _memory.at(_ip.get());
     auto hi = _memory.at(_ip.get() + 1);
     return (hi << 8) | lo;
@@ -181,6 +199,24 @@ public:
       default: utils::die("Unexpected memory access"); break;
     }
   }
+
+
+  utils::Setter<std::uint32_t>& setter_eax() { return _eax; };
+  utils::Setter<std::uint32_t>& setter_ebx() { return _ebx; };
+  utils::Setter<std::uint32_t>& setter_ecx() { return _ecx; };
+  utils::Setter<std::uint32_t>& setter_edx() { return _edx; };
+
+  utils::Setter<std::uint32_t>& setter_esi() { return _esi; };
+  utils::Setter<std::uint32_t>& setter_edi() { return _edi; };
+  utils::Setter<std::uint32_t>& setter_ebp() { return _ebp; };
+  utils::Setter<std::uint32_t>& setter_esp() { return _esp; };
+
+  utils::Setter<std::uint16_t>& setter_cs() { return _cs; };
+  utils::Setter<std::uint16_t>& setter_ds() { return _ds; };
+  utils::Setter<std::uint16_t>& setter_ss() { return _ss; };
+  utils::Setter<std::uint16_t>& setter_es() { return _es; };
+  utils::Setter<std::uint16_t>& setter_fs() { return _fs; };
+  utils::Setter<std::uint16_t>& setter_gs() { return _gs; };
 
 
 private:
